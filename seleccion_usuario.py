@@ -3,32 +3,24 @@ import flet as ft
 def main(page: ft.Page):
     page.title = "Selecciona tu tipo de usuario"
     page.bgcolor = ft.colors.WHITE
-    
-    # Add scroll to the main page
     page.scroll = ft.ScrollMode.AUTO
 
     def navigate(e):
-        # Navigate to the selected user type page
         user_type = e.control.data
         try:
             if user_type == "cuidador":
-                # Importación tardía para evitar importación circular
                 from cuidador import cuidador_page
                 cuidador_page(page)
             elif user_type == "familiar":
-                # Importación tardía para evitar importación circular
                 from familiar import familiar_page
                 familiar_page(page)
             elif user_type == "adulto_mayor":
-                # Importación tardía para evitar importación circular
                 from adulto_mayor import adulto_mayor_page
                 adulto_mayor_page(page)
             elif user_type == "medico":
-                # Importación tardía para evitar importación circular
                 from medico import medico_page
                 medico_page(page)
             elif user_type == "tienda":
-                # Importación tardía para evitar importación circular
                 from tienda_dulces import tienda_page
                 tienda_page(page)
         except Exception as e:
@@ -36,7 +28,7 @@ def main(page: ft.Page):
             page.snack_bar = ft.SnackBar(content=ft.Text(f"Error al cargar: {str(e)}"))
             page.snack_bar.open = True
             page.update()
-    
+
     options = [
         ("Cuidadores", ft.colors.PURPLE, "cuidador", ft.icons.HEALTH_AND_SAFETY),
         ("Familiares", ft.colors.BLUE, "familiar", ft.icons.FAMILY_RESTROOM),
@@ -44,7 +36,7 @@ def main(page: ft.Page):
         ("Médicos", ft.colors.RED, "medico", ft.icons.MEDICAL_SERVICES),
         ("Tienda", ft.colors.PINK, "tienda", ft.icons.STORE),
     ]
-    
+
     buttons = []
     for label, color, data, icon in options:
         btn = ft.ElevatedButton(
@@ -66,48 +58,75 @@ def main(page: ft.Page):
             )
         )
         buttons.append(btn)
-    
+
     title = ft.Text(
-        "Bienvenido a Vitalis", 
-        size=32, 
-        color=ft.colors.BLACK, 
+        "Bienvenido a Vitalis",
+        size=32,
+        color=ft.colors.BLACK,
         weight=ft.FontWeight.BOLD,
         text_align=ft.TextAlign.CENTER
     )
-    
+
     subtitle = ft.Text(
-        "Selecciona tu tipo de usuario para continuar", 
-        size=18, 
+        "Selecciona la opción de tu preferencia",
+        size=18,
         color=ft.colors.GREY_800,
         text_align=ft.TextAlign.CENTER
     )
-    
-    # App logo/icon
-    logo = ft.Icon(
-        ft.icons.FAVORITE,
-        size=80,
-        color=ft.colors.BLUE
+
+    logo = ft.Image(
+        src="./assets/Vitalis_logo.jpg",
+        width=120,
+        height=120,
+        fit=ft.ImageFit.CONTAIN
     )
-    
-    # Make the main column scrollable
+
+    logo_container = ft.Container(
+        content=logo,
+        alignment=ft.alignment.center,
+        padding=ft.Padding(0, 20, 0, 10)
+    )
+
+    content_column = ft.Column(
+        [
+            logo_container,
+            title,
+            subtitle,
+            ft.Divider(height=2, color=ft.colors.GREY_300),
+            *buttons
+        ],
+        alignment=ft.MainAxisAlignment.CENTER,
+        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+        spacing=20,
+        scroll=ft.ScrollMode.AUTO,
+    )
+
+    main_container = ft.Container(
+        content=content_column,
+        alignment=ft.alignment.center,
+        expand=True,
+        padding=20
+    )
+
+    background_image = ft.Container(
+        content=ft.Image(
+            src="./assets/Vitalis_logo.jpg",
+            fit=ft.ImageFit.CONTAIN,
+            opacity=0.6,
+            width=600,
+            height=600
+        ),
+        alignment=ft.alignment.Alignment(1.2, 1), 
+        expand=True
+    )
+
     page.add(
-        ft.Container(
-            content=ft.Column(
-                [
-                    logo,
-                    title,
-                    subtitle,
-                    ft.Divider(height=2, color=ft.colors.GREY_300),
-                    *buttons
-                ],
-                alignment=ft.MainAxisAlignment.CENTER,
-                horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-                spacing=20,
-                scroll=ft.ScrollMode.AUTO,
-            ),
-            alignment=ft.alignment.center,
-            expand=True,
-            padding=20
+        ft.Stack(
+            [
+                background_image,
+                main_container
+            ],
+            expand=True
         )
     )
 

@@ -17,8 +17,17 @@ def medico_page(page: ft.Page):
         ])
         
         if personal_fields_filled and ocupacion_fields_filled:
-            mensaje.value = "Registro exitoso"
+            mensaje.value = "Registro exitoso. Bienvenido al sistema médico."
             mensaje.color = ft.colors.GREEN
+            mensaje.update()
+            
+            # Mostrar mensaje de éxito y opciones
+            page.snack_bar = ft.SnackBar(
+                content=ft.Text("Registro completado exitosamente. El sistema médico estará disponible próximamente."),
+                bgcolor=ft.colors.GREEN
+            )
+            page.snack_bar.open = True
+            page.update()
         else:
             mensaje.value = "Por favor, complete todos los campos"
             mensaje.color = ft.colors.RED
@@ -192,4 +201,3 @@ def medico_page(page: ft.Page):
 
 if __name__ == "__main__":
     ft.app(target=medico_page)
-

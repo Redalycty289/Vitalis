@@ -1,5 +1,4 @@
 import flet as ft
-from marketplace import marketplace_page
 
 def familiar_page(page: ft.Page):
     page.title = "Inicio de Sesión - Familiares"
@@ -14,7 +13,7 @@ def familiar_page(page: ft.Page):
             mensaje.value = "Registro exitoso"
             mensaje.color = ft.colors.GREEN
             
-            # Recopilar datos del familiar para pasarlos al marketplace
+            # Recopilar datos del familiar para pasarlos al menú
             datos_familiar = {
                 "nombres": nombres.value,
                 "apellidos": apellidos.value,
@@ -27,17 +26,18 @@ def familiar_page(page: ft.Page):
                 }
             }
             
-            # Mostrar mensaje de éxito y redirigir al marketplace
+            # Mostrar mensaje de éxito y redirigir al menú de familiares
             page.snack_bar = ft.SnackBar(
-                content=ft.Text("Registro exitoso. Redirigiendo al marketplace de cuidadores..."),
+                content=ft.Text("Registro exitoso. Accediendo al panel de familiares..."),
                 bgcolor=ft.colors.GREEN
             )
             page.snack_bar.open = True
             page.update()
         
-            # Redirigir al marketplace
+            # Redirigir al menú de familiares
+            from menu_familiares import menu_familiares_page
             page.clean()
-            marketplace_page(page, datos_familiar)
+            menu_familiares_page(page, datos_familiar)
         else:
             mensaje.value = "Por favor, complete todos los campos"
             mensaje.color = ft.colors.RED
@@ -162,6 +162,15 @@ def familiar_page(page: ft.Page):
                 color=ft.colors.BLUE
             ),
             ft.Text(
+                "• Acceda a telemedicina y diagnóstico preliminar",
+                size=14,
+                weight=ft.FontWeight.BOLD
+            ),
+            ft.Text(
+                "• Contrate cuidadores profesionales verificados",
+                size=14
+            ),
+            ft.Text(
                 "• Reciba notificaciones sobre medicamentos y citas médicas",
                 size=14
             ),
@@ -172,11 +181,6 @@ def familiar_page(page: ft.Page):
             ft.Text(
                 "• Comuníquese con médicos y cuidadores",
                 size=14
-            ),
-            ft.Text(
-                "• Acceda al marketplace de cuidadores profesionales",
-                size=14,
-                weight=ft.FontWeight.BOLD
             ),
         ]),
         padding=20,
