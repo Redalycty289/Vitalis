@@ -310,7 +310,7 @@ def marketplace_page(page: ft.Page, datos_familiar=None):
         if cuidador["vitalis"]:
             vitalis_badge = ft.Container(
                 content=ft.Image(
-                    src="/images/vitalis-logo.jpg",
+                    src="./assets/Vitalis_logo.jpg",
                     width=25,
                     height=25,
                     fit=ft.ImageFit.CONTAIN
@@ -448,7 +448,7 @@ def marketplace_page(page: ft.Page, datos_familiar=None):
             if cuidador["vitalis"]:
                 vitalis_badge = ft.Container(
                     content=ft.Image(
-                        src="/images/vitalis-logo.jpg",
+                        src="./assets/Vitalis_logo.jpg",
                         width=25,
                         height=25,
                         fit=ft.ImageFit.CONTAIN
