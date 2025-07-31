@@ -27,14 +27,14 @@ def main(page: ft.Page):
             print(f"Error al navegar: {e}")
             page.snack_bar = ft.SnackBar(content=ft.Text(f"Error al cargar: {str(e)}"))
             page.snack_bar.open = True
-            page.update()
+            page.update()              
 
     options = [
         ("Cuidadores", ft.colors.PURPLE, "cuidador", ft.icons.HEALTH_AND_SAFETY),
         ("Familiares", ft.colors.BLUE, "familiar", ft.icons.FAMILY_RESTROOM),
         ("Adultos Mayores", ft.colors.TEAL, "adulto_mayor", ft.icons.ELDERLY),
         ("Médicos", ft.colors.RED, "medico", ft.icons.MEDICAL_SERVICES),
-        ("Tienda", ft.colors.PINK, "tienda", ft.icons.STORE),
+        ("Tiendas", ft.colors.BLACK, "tienda", ft.icons.STORE),
     ]
 
     buttons = []

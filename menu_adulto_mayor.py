@@ -5,8 +5,7 @@ def main(page: ft.Page):
     page.bgcolor = ft.colors.WHITE
     page.padding = 20
     page.scroll = ft.ScrollMode.AUTO
-    
-    # Navegar a diferentes secciones
+   
     def navegar(e):
         destino = e.control.data
         if destino == "memoria":
